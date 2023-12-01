@@ -1,0 +1,14 @@
+.infoCard{
+  min-width: 300px;
+  padding: 15px 20px;
+  background-color: #fff;
+  color: #242424;
+  border-radius: 8px;
+  margin-top: 25px;
+}
+.avatar{
+  width: 200px;
+  height: 150px;
+  display: block;
+  margin: 0  auto 20px auto;
+}

@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-import searchReducer from './slices/searchSlice';
-import metaInfoReducer from './slices/metaInfoSlice';
-import loadingStatusReducer from './slices/loadingStatusSlice';
-import { pokemonApi } from './api';
+import { configureStore } from "@reduxjs/toolkit";
+import searchReducer from "./slices/searchSlice";
+import metaInfoReducer from "./slices/metaInfoSlice";
+import loadingStatusReducer from "./slices/loadingStatusSlice";
+import { pokemonApi } from "./api";
 
 export const store = configureStore({
   reducer: {
