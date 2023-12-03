@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { FormTitleProps, FormType } from "../../types/types";
 import "./styles.css";
-import { useAppDispatch } from "../../store/hooks";
-import { setReactHookForm } from "../../store/slice/formSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setReactHookForm } from "../../store/slice/reactHookFormSlice";
+import { setuncontrolledComponentsForm } from "../../store/slice/uncontrolledComponentsFormSlice";
 
 export default function FormTitle(formProps: FormTitleProps) {
   const { form } = formProps;
@@ -15,9 +16,12 @@ export default function FormTitle(formProps: FormTitleProps) {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  const reactHookFormData = useAppSelector((state) => state.reactHookForm);
+  const uncontrolledFormData = useAppSelector((state) => state.uncontrolledComponentsForm);
+  
   const handleNavigate = () => {
-    dispatch(setReactHookForm({newInfo: false}));
+    dispatch(setReactHookForm({ ...reactHookFormData, newInfo: false, }));
+    dispatch(setuncontrolledComponentsForm({ ...uncontrolledFormData, newInfo: false }));
     navigate(link);
   };
 

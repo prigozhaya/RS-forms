@@ -1,8 +1,8 @@
 import { InfoCardProps } from "../../types/types";
 import "./styles.css";
 
-export default function InfoCard({data}:InfoCardProps) {
-  const { name, age, email, gender, image, country, newInfo} = data;
+export default function InfoCard({ data }: InfoCardProps) {
+  const { name, age, email, gender, image, country, newInfo } = data;
   const newInfoIndicator = newInfo ? "newInfo" : "";
   return (
     <div className={`infoCard ${newInfoIndicator}`}>

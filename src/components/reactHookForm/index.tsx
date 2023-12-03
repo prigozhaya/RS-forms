@@ -3,13 +3,17 @@ import { FieldValues, useForm } from "react-hook-form";
 import { PasswordStrength } from "./validation/PasswordStrength";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAppDispatch } from "../../store/hooks";
-import { setReactHookForm } from "../../store/slice/formSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setReactHookForm } from "../../store/slice/reactHookFormSlice";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function ReactHookForm() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const countries = useAppSelector((state) => state.countries.country);
+  const [password, setPassword] = useState<string>("");
+
   const schema = yup.object().shape({
     name: yup
       .string()
@@ -26,8 +30,7 @@ export default function ReactHookForm() {
       .string()
       .email("e-mail address must contain an '@' and domain name")
       .required("The field mustn't be empty"),
-    gender: yup
-      .string().required("The field mustn't be empty"),
+    gender: yup.string().required("The field mustn't be empty"),
     password: yup
       .string()
       .min(8, "Password has to be longer than 8 characters!")
@@ -55,14 +58,12 @@ export default function ReactHookForm() {
               (value as File[])[0]?.size <= 1000000
           : false;
       }),
-      country: yup
-      .string().required("The field mustn't be empty"),
+    country: yup.string().required("The field mustn't be empty"),
   });
 
   const {
     register,
     formState: { errors },
-    getValues,
     handleSubmit,
   } = useForm({
     mode: "all",
@@ -70,13 +71,15 @@ export default function ReactHookForm() {
   });
 
   const onSubmit = (data: FieldValues) => {
-    // console.log(data.image[0])
-    data.image= URL.createObjectURL(data.image[0]);
-    // console.log(data.image)
+    data.image = URL.createObjectURL(data.image[0]);
     data.newInfo = true;
     dispatch(setReactHookForm(data));
     navigate("/");
   };
+
+  function handleSetPassword(e: React.ChangeEvent<HTMLInputElement>) {
+    setPassword(e.target.value);
+  }
 
   return (
     <div className="formContainer">
@@ -116,6 +119,7 @@ export default function ReactHookForm() {
             id="password"
             placeholder="Password"
             {...register("password")}
+            onChange={handleSetPassword}
           />
           <span
             className="hint"
@@ -125,10 +129,11 @@ export default function ReactHookForm() {
           </span>
 
           <span className="errorMsg errorPassword">
-            {errors?.password && `${errors?.password.message}`} {getValues("password") && (
-                <PasswordStrength value={getValues("password")} />)}
+            {errors?.password && `${errors?.password.message}`}{" "}
+            {password.length > 0 && (
+              <PasswordStrength value={password} />
+            )}
           </span>
-
         </div>
         <div>
           <input
@@ -151,15 +156,10 @@ export default function ReactHookForm() {
           />
 
           <datalist id="countryList">
-            <option value="Chocolate"></option>
-            <option value="Coconut"></option>
-            <option value="Mint"></option>
-            <option value="Strawberry"></option>
-            <option value="Vanilla"></option>
+            {countries.map((country: string) => <option value={country}></option> )}
           </datalist>
           <p className="errorMsg">
-            {errors?.country &&
-              `${errors?.country.message}`}
+            {errors?.country && `${errors?.country.message}`}
           </p>
         </div>
         <div>
@@ -176,8 +176,7 @@ export default function ReactHookForm() {
           </label>
           <label>
             Man
-            <input type="radio" id="man" value="man" {...register("gender")}
- />
+            <input type="radio" id="man" value="man" {...register("gender")} />
           </label>
         </div>
         <div>

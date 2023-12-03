@@ -4,18 +4,9 @@ import { FormType } from "../../types/types";
 import InfoCard from "../../components/infoCard";
 import { useAppSelector } from "../../store/hooks";
 
-
 export default function HomePage() {
   const reactHookFormData = useAppSelector((state) => state.reactHookForm);
-  const uncontrolledFormData = {
-  name: "",
-  age: 0,
-  email: "",
-  gender: "",
-  image: "",
-  country: "",
-  newInfo: false,
-};
+  const uncontrolledFormData = useAppSelector((state) => state.uncontrolledComponentsForm);
   return (
     <>
       <div className="pageContainer">
@@ -25,7 +16,7 @@ export default function HomePage() {
         </div>
         <div className="formBlock">
           <FormTitle form={FormType.uncontrolled} />
-          <InfoCard data={uncontrolledFormData}/>
+          <InfoCard data={uncontrolledFormData} />
         </div>
       </div>
     </>

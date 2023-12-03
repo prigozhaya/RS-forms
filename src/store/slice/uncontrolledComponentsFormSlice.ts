@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-const reactHookFormSlice = createSlice({
-  name: 'reactHookForm',
+const uncontrolledComponentsFormSlice = createSlice({
+  name: "uncontrolledComponentsForm",
   initialState: {
     name: "",
     age: 0,
@@ -12,7 +12,7 @@ const reactHookFormSlice = createSlice({
     newInfo: false,
   },
   reducers: {
-    setReactHookForm(state, { payload }) {
+    setuncontrolledComponentsForm(state, { payload }) {
       state.name = payload.name;
       state.age = payload.age;
       state.email = payload.email;
@@ -24,6 +24,5 @@ const reactHookFormSlice = createSlice({
   },
 });
 
-export const { setReactHookForm} =
-reactHookFormSlice.actions;
-export default reactHookFormSlice.reducer;
+export const { setuncontrolledComponentsForm } = uncontrolledComponentsFormSlice.actions;
+export default uncontrolledComponentsFormSlice.reducer;

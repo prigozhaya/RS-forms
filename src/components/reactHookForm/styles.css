@@ -1,27 +1,27 @@
-.formContainer{
+.formContainer {
   display: flex;
   flex-direction: column;
 }
 
-.errorPassword{
+.errorPassword {
   display: block;
   width: auto;
 }
-.errorMsg{
+.errorMsg {
   color: rgb(223, 81, 81);
   font-size: 13px;
   margin: 5px;
   height: 15px;
 }
 
-.medium{
+.medium {
   color: rgb(234, 180, 64);
 }
-.hard{
+.hard {
   color: rgb(68, 197, 120);
 }
 
-.hint{
+.hint {
   display: inline-block;
   width: 25px;
   height: 25px;

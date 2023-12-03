@@ -5,8 +5,8 @@ export default function ReactHookFormPage() {
   return (
     <>
       <div className="pageContainer">
-<h1>reactHookFormPage</h1>
-<ReactHookForm/>
+        <h1>reactHookFormPage</h1>
+        <ReactHookForm />
       </div>
     </>
   );
