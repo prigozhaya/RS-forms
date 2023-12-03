@@ -1,13 +1,13 @@
-.pageContainer{
-display: flex;
-justify-content: space-between;
-width: 100%;
-gap: 10px;
-flex-wrap: wrap;
+.pageContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 720px) {
   .pageContainer {
-    justify-content: center;  
+    justify-content: center;
   }
 }

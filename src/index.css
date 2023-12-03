@@ -22,8 +22,10 @@ body {
   justify-content: center;
 }
 
-h1, h2, h3 {
-margin: 0;
+h1,
+h2,
+h3 {
+  margin: 0;
 }
 
 button {
@@ -42,4 +44,3 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-

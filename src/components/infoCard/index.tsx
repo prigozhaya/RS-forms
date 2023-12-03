@@ -1,14 +1,17 @@
+import { InfoCardProps } from "../../types/types";
 import "./styles.css";
 
-export default function InfoCard() {
+export default function InfoCard({data}:InfoCardProps) {
+  const { name, age, email, gender, image, country, newInfo} = data;
+  const newInfoIndicator = newInfo ? "newInfo" : "";
   return (
-    <div className="infoCard">
-      <img src="src\assets\unknownUser.webp" alt="img"  className="avatar"/>
-      <h3>Name: N</h3>
-      <h3>Age: 13</h3>
-      <h3>email: a@mail.com</h3>
-      <h3>Gender: F</h3>
-      <h3>Country: N</h3>
+    <div className={`infoCard ${newInfoIndicator}`}>
+      <img src={`${image}`} alt="img" className="avatar" />
+      <h3>Name: {name}</h3>
+      <h3>Age: {age}</h3>
+      <h3>email: {email}</h3>
+      <h3>Gender: {gender}</h3>
+      <h3>Country: {country}</h3>
     </div>
   );
 }
