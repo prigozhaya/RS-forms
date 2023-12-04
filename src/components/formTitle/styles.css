@@ -1,0 +1,11 @@
+.formTitle {
+  display: flex;
+  min-width: 300px;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.formButton {
+  width: 100px;
+  height: 30px;
+}
