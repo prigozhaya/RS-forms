@@ -4,8 +4,8 @@ import "./styles.css";
 export default function UncontrolledComponentsFormPage() {
   return (
     <>
-      <div className="pageContainer">
-        <h1>uncontrolledComponentsFormPage</h1>
+      <div>
+        <h1>Uncontrolled Components Form</h1>
         <UncontrolledComponentsForm />
       </div>
     </>

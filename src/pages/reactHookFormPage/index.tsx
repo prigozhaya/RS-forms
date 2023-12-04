@@ -4,8 +4,8 @@ import "./styles.css";
 export default function ReactHookFormPage() {
   return (
     <>
-      <div className="pageContainer">
-        <h1>reactHookFormPage</h1>
+      <div>
+        <h1>React Hook Form</h1>
         <ReactHookForm />
       </div>
     </>

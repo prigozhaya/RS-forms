@@ -24,5 +24,6 @@ const uncontrolledComponentsFormSlice = createSlice({
   },
 });
 
-export const { setuncontrolledComponentsForm } = uncontrolledComponentsFormSlice.actions;
+export const { setuncontrolledComponentsForm } =
+  uncontrolledComponentsFormSlice.actions;
 export default uncontrolledComponentsFormSlice.reducer;

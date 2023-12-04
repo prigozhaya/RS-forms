@@ -1,9 +1,19 @@
 import React, { useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import * as yup from "yup";
 import { PasswordStrength } from "../reactHookForm/validation/PasswordStrength";
 import { setuncontrolledComponentsForm } from "../../store/slice/uncontrolledComponentsFormSlice";
 import { useNavigate } from "react-router-dom";
+import {
+  nameSchema,
+  ageSchema,
+  emailSchema,
+  genderSchema,
+  passwordSchema,
+  passwordConfirmationSchema,
+  acceptSchema,
+  imageSchema,
+  countrySchema,
+} from "./validation/yupValidation";
 export default function UncontrolledComponentsForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const dispatch = useAppDispatch();
@@ -35,51 +45,6 @@ export default function UncontrolledComponentsForm() {
   function handleSetGender(e: React.ChangeEvent<HTMLInputElement>) {
     setGender(e.target.value);
   }
-
-  const nameSchema = yup
-    .string()
-    .test("nameFirstLetter", "First letter must be uppercased", (value) => {
-      return value?.slice(0, 1) === value?.slice(0, 1).toUpperCase();
-    })
-    .required("The field mustn't be empty");
-  const ageSchema = yup
-    .number()
-    .typeError("Must be a number")
-    .positive()
-    .required("The field mustn't be empty");
-
-  const emailSchema = yup
-    .string()
-    .email("e-mail address must contain an '@' and domain name")
-    .required("The field mustn't be empty");
-  const genderSchema = yup.string().required("The field mustn't be empty");
-  const passwordSchema = yup
-    .string()
-    .min(8, "Password has to be longer than 8 characters!")
-    .required("The field mustn't be empty");
-  const passwordConfirmationSchema = yup
-    .string()
-    .oneOf([yup.ref("password")], "Passwords must match")
-    .required("The field mustn't be empty");
-  const acceptSchema = yup
-    .bool()
-    .oneOf([true], "You must accept the terms and conditions");
-  const imageSchema = yup
-    .mixed()
-    .test("type", "We only support jpeg/png", (value) => {
-      return value
-        ? (value as File[]).length > 0 &&
-            value &&
-            ((value as File[])[0]?.type === "image/jpeg" ||
-              (value as File[])[0].type === "image/png")
-        : false;
-    })
-    .test("fileSize", "The file is too large", (value) => {
-      return value
-        ? (value as File[]).length > 0 && (value as File[])[0]?.size <= 1000000
-        : false;
-    });
-  const countrySchema = yup.string().required("The field mustn't be empty");
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -208,10 +173,9 @@ export default function UncontrolledComponentsForm() {
 
           <span className="errorMsg errorPassword">
             {passwordError}
-            {password.current?.value.length &&
-              password.current?.value.length > 0 && (
-                <PasswordStrength value={password?.current?.value || ""} />
-              )}
+            {password.current?.value && password.current?.value.length > 0 && (
+              <PasswordStrength value={password?.current?.value || ""} />
+            )}
           </span>
         </div>
         <div>

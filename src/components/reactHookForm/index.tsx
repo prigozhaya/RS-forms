@@ -1,65 +1,19 @@
-import "./styles.css";
 import { FieldValues, useForm } from "react-hook-form";
 import { PasswordStrength } from "./validation/PasswordStrength";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setReactHookForm } from "../../store/slice/reactHookFormSlice";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { schema } from "./validation/yupValidation";
 
 export default function ReactHookForm() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const countries = useAppSelector((state) => state.countries.country);
-  const [password, setPassword] = useState<string>("");
 
-  const schema = yup.object().shape({
-    name: yup
-      .string()
-      .test("nameFirstLetter", "First letter must be uppercased", (value) => {
-        return value?.slice(0, 1) === value?.slice(0, 1).toUpperCase();
-      })
-      .required("The field mustn't be empty"),
-    age: yup
-      .number()
-      .typeError("Must be a number")
-      .positive()
-      .required("The field mustn't be empty"),
-    email: yup
-      .string()
-      .email("e-mail address must contain an '@' and domain name")
-      .required("The field mustn't be empty"),
-    gender: yup.string().required("The field mustn't be empty"),
-    password: yup
-      .string()
-      .min(8, "Password has to be longer than 8 characters!")
-      .required("The field mustn't be empty"),
-    passwordConfirmation: yup
-      .string()
-      .oneOf([yup.ref("password")], "Passwords must match")
-      .required("The field mustn't be empty"),
-    accept: yup
-      .bool()
-      .oneOf([true], "You must accept the terms and conditions"),
-    image: yup
-      .mixed()
-      .test("type", "We only support jpeg/png", (value) => {
-        return value
-          ? (value as File[]).length > 0 &&
-              value &&
-              ((value as File[])[0]?.type === "image/jpeg" ||
-                (value as File[])[0].type === "image/png")
-          : false;
-      })
-      .test("fileSize", "The file is too large", (value) => {
-        return value
-          ? (value as File[]).length > 0 &&
-              (value as File[])[0]?.size <= 1000000
-          : false;
-      }),
-    country: yup.string().required("The field mustn't be empty"),
-  });
+  const countries = useAppSelector((state) => state.countries.country);
+
+  const [password, setPassword] = useState<string>("");
 
   const {
     register,
@@ -130,9 +84,7 @@ export default function ReactHookForm() {
 
           <span className="errorMsg errorPassword">
             {errors?.password && `${errors?.password.message}`}{" "}
-            {password.length > 0 && (
-              <PasswordStrength value={password} />
-            )}
+            {password.length > 0 && <PasswordStrength value={password} />}
           </span>
         </div>
         <div>
@@ -156,7 +108,9 @@ export default function ReactHookForm() {
           />
 
           <datalist id="countryList">
-            {countries.map((country: string) => <option value={country}></option> )}
+            {countries.map((country: string) => (
+              <option value={country} key={country}></option>
+            ))}
           </datalist>
           <p className="errorMsg">
             {errors?.country && `${errors?.country.message}`}
@@ -171,13 +125,15 @@ export default function ReactHookForm() {
               id="woman"
               {...register("gender")}
               value="woman"
-              defaultChecked
             />
           </label>
           <label>
             Man
             <input type="radio" id="man" value="man" {...register("gender")} />
           </label>
+          <p className="errorMsg">
+            {errors?.gender && `${errors?.gender.message}`}
+          </p>
         </div>
         <div>
           <label>

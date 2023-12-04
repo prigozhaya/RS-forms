@@ -6,7 +6,9 @@ import { useAppSelector } from "../../store/hooks";
 
 export default function HomePage() {
   const reactHookFormData = useAppSelector((state) => state.reactHookForm);
-  const uncontrolledFormData = useAppSelector((state) => state.uncontrolledComponentsForm);
+  const uncontrolledFormData = useAppSelector(
+    (state) => state.uncontrolledComponentsForm,
+  );
   return (
     <>
       <div className="pageContainer">

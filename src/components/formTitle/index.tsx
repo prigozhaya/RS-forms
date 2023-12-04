@@ -17,11 +17,18 @@ export default function FormTitle(formProps: FormTitleProps) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const reactHookFormData = useAppSelector((state) => state.reactHookForm);
-  const uncontrolledFormData = useAppSelector((state) => state.uncontrolledComponentsForm);
-  
+  const uncontrolledFormData = useAppSelector(
+    (state) => state.uncontrolledComponentsForm,
+  );
+
   const handleNavigate = () => {
-    dispatch(setReactHookForm({ ...reactHookFormData, newInfo: false, }));
-    dispatch(setuncontrolledComponentsForm({ ...uncontrolledFormData, newInfo: false }));
+    dispatch(setReactHookForm({ ...reactHookFormData, newInfo: false }));
+    dispatch(
+      setuncontrolledComponentsForm({
+        ...uncontrolledFormData,
+        newInfo: false,
+      }),
+    );
     navigate(link);
   };
 

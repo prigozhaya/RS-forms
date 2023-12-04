@@ -23,15 +23,15 @@ export type InfoCardProps = {
   };
 };
 
-export type ValidationErrors={
-countriesError?: string;
-nameError?: string;
-ageError?: string;
-emailError?: string;
-passwordError?: string;
-passwordConfirmationError?: string;
-countryError?: string;
-genderError?: string;
-imageError?: string;
-acceptError?: string;
-}
+export type ValidationErrors = {
+  countriesError?: string;
+  nameError?: string;
+  ageError?: string;
+  emailError?: string;
+  passwordError?: string;
+  passwordConfirmationError?: string;
+  countryError?: string;
+  genderError?: string;
+  imageError?: string;
+  acceptError?: string;
+};
